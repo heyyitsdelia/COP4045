@@ -137,6 +137,9 @@ class NVector:
         """
         j) class method zeros(n) that returns a new NVector object with dimension n with all elements 0.
         """
+        if n < 0:
+            raise ValueError("cannot be negative.")
+
         return cls([0] * n)
 
     #testif module for main function testing
@@ -199,9 +202,13 @@ def main() -> None:
     testif(10 + nv1 == NVector(15, 13, 17, 9),"__radd__", "radd works", "radd failed")
 
     #testing part i
-    testif(nv1 * nv4 == 2, "__mul__", "mul works", "mul failed")
-    testif(nv1 * 10 == 30, "__mul__", "mul works", "mul failed")
-    testif(10 * nv1 == 30, "__rmul__", "rmul works", "rmul failed")
+    nv5 = NVector(2, 4, 3, 6)
+
+    testif(nv1 * nv5 == 37, "__mul__", "mul works", "mul failed")
+
+    testif(nv1 * 5 == 70, "__mul__", "mul works", "mul failed")
+
+    testif(5 * nv1 == 70, "__rmul__", "rmul works", "rmul failed")
 
     #testing part j
     testif(NVector.zeros(4) == NVector(0, 0, 0, 0), "zeros", "zeros works", "zeros failed")
